@@ -21,10 +21,17 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    //          mWakeUpManager.startWakeUp("24662221",
+    //                 "4cbxGXgGja2fpMCrMv1Zb3aA",
+    //                 "3GVIkRGY1Bq3QV3yalZiD6QBFSYnIZys");
+
     FlutterBaiduSpeechPlugin.initSDK(
-      appId: '24662215',
-      appKey: 'XMG0i4CPCxN6aTvakDZUWVvk',
-      appSecret: 'UIyCMX34RRwru6b5db5r8LhuNG9FGIsX',
+      // appId: '24662215',
+      appId: '24662221',
+      // appKey: 'XMG0i4CPCxN6aTvakDZUWVvk',
+      appKey: '4cbxGXgGja2fpMCrMv1Zb3aA',
+      // appSecret: 'UIyCMX34RRwru6b5db5r8LhuNG9FGIsX',
+      appSecret: '3GVIkRGY1Bq3QV3yalZiD6QBFSYnIZys',
       onEvent: (value) {
         if (kDebugMode) {
           print('监听回调 = $value');
