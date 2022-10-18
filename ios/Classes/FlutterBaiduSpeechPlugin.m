@@ -140,22 +140,6 @@ FlutterStreamHandler
 - (void)WakeupClientWorkStatus:(int)workStatus obj:(id)aObj
 {
     switch (workStatus) {
-        case EWakeupEngineWorkStatusStarted: {
-            NSLog(@"WAKEUP CALLBACK: Started.\n");
-            break;
-        }
-        case EWakeupEngineWorkStatusStopped: {
-            NSLog(@"WAKEUP CALLBACK: Stopped.\n");
-            break;
-        }
-        case EWakeupEngineWorkStatusLoaded: {
-            NSLog(@"WAKEUP CALLBACK: Loaded.\n");
-            break;
-        }
-        case EWakeupEngineWorkStatusUnLoaded: {
-            NSLog(@"WAKEUP CALLBACK: UnLoaded.\n");
-            break;
-        }
         case EWakeupEngineWorkStatusTriggered: {
             NSLog(@"唤醒 = %@",aObj);
             self.isWakeUping = YES;
@@ -181,23 +165,6 @@ FlutterStreamHandler
 - (void)VoiceRecognitionClientWorkStatus:(int)workStatus obj:(id)aObj
 {
     switch (workStatus) {
-        case EVoiceRecognitionClientWorkStatusNewRecordData: {
-            NSLog(@"====EVoiceRecognitionClientWorkStatusNewRecordData\n");
-            break;
-        }
-            
-        case EVoiceRecognitionClientWorkStatusStartWorkIng: {
-            NSLog(@"====EVoiceRecognitionClientWorkStatusStartWorkIng\n");
-            break;
-        }
-        case EVoiceRecognitionClientWorkStatusStart: {
-            NSLog(@"====EVoiceRecognitionClientWorkStatusStart:%@",@"CALLBACK: detect voice start point.\n");
-            break;
-        }
-        case EVoiceRecognitionClientWorkStatusEnd: {
-            NSLog(@"====EVoiceRecognitionClientWorkStatusEnd:%@",@"CALLBACK: detect voice end point.\n");
-            break;
-        }
         case EVoiceRecognitionClientWorkStatusFlushData: {
             NSLog(@"====EVoiceRecognitionClientWorkStatusFlushData%@",@"CALLBACK: partial result");
             NSLog(@"EVoiceRecognitionClientWorkStatusFlushData------=====%@",[NSString stringWithFormat:@"CALLBACK: final result - %@.\n\n", [self getDescriptionForDic:aObj]]);
@@ -258,7 +225,7 @@ FlutterStreamHandler
 
 - (void)configResultStatus:(NSString *)status type:(NSInteger)type data:(NSString *)data
 {
-    NSDictionary * resultDic = @{@"status" : status, @"data" : data, @"type" : @(type)};
+    NSDictionary * resultDic = @{@"status" : status, @"data" : data, @"type" : [NSString stringWithFormat:@"%ld",type]};
     self.eventSink(resultDic);
 }
 
