@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_baidu_speech_plugin (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_baidu_speech_plugin (from `.symlinks/plugins/flutter_baidu_speech_plugin/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_baidu_speech_plugin:
+    :path: ".symlinks/plugins/flutter_baidu_speech_plugin/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_baidu_speech_plugin: 051e5bac24516cf3aad642099bea07062faa9f49
+
+PODFILE CHECKSUM: 94b86b1631a5816ba6cfc341d4d8f6cfbf631510
+
+COCOAPODS: 1.11.3
