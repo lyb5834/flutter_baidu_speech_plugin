@@ -17,8 +17,8 @@ Pod::Spec.new do |s|
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.platform = :ios, '10.0'
-  # s.vendored_libraries = 'Libs/BDSClientLib/libBaiduSpeechSDK.a'
-  s.resources = ['Assets/*']
+   s.vendored_libraries = 'Libs/BDSClientLib/libBaiduSpeechSDK.a'
+  s.resources = ['Assets/**/*']
 
   s.frameworks = 'AudioToolbox',
   'AVFoundation',
