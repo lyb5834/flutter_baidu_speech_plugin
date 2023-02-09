@@ -90,7 +90,7 @@ public class FlutterBaiduSpeechPlugin implements FlutterPlugin, MethodCallHandle
                                     if (eventSink != null) {
                                         HashMap<String, String> map = new HashMap<>();
                                         map.put("status", "volumeChanged");
-                                        map.put("data", String.valueOf(volume));
+                                        map.put("data", String.valueOf(volumePercent));
                                         map.put("type", String.valueOf(type));
                                         eventSink.success(map);
                                     }
