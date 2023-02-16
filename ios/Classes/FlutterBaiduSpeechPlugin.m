@@ -170,7 +170,6 @@ FlutterStreamHandler
             NSLog(@"EVoiceRecognitionClientWorkStatusFlushData------=====%@",[NSString stringWithFormat:@"CALLBACK: final result - %@.\n\n", [self getDescriptionForDic:aObj]]);
             NSDictionary * result = (NSDictionary *)aObj;
             NSArray *voiceResultsArr = result[@"results_recognition"];
-            self.isWakeUping = NO;
             if (voiceResultsArr.count > 0) {
                 [self configResultStatus:@"flushData" type:0 data:voiceResultsArr.firstObject];
             }
@@ -205,6 +204,9 @@ FlutterStreamHandler
             NSLog(@"====EVoiceRecognitionClientWorkStatusError%@",[NSString stringWithFormat:@"CALLBACK: encount error - %@.\n", (NSError *)aObj]);
             
             NSError * error = (NSError *)aObj;
+            if (![self hasHeadset] && self.isWakeUping) {
+                [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
+            }
             self.isWakeUping = NO;
             [self configResultStatus:@"statusError" type:0 data:error.localizedDescription];
             break;
