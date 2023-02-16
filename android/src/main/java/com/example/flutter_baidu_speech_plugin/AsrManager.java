@@ -149,6 +149,7 @@ public class AsrManager implements LifecycleEventObserver {
                 if (AsrVo.hasError(asrVo)) {
 //                    int errorCode = asrVo.getError();
 //                    int subErrorCode = asrVo.getSubError();
+                    Log.d(TAG, "ASR_PARTIAL recognizerVo  error");
                     mAsrListener.asrErrorFinish();
                 } else {
                     Log.d(TAG, "ASR_PARTIAL CALLBACK_EVENT_ASR_FINISH:" + new Gson().toJson(asrVo.getResultsRecognition()));

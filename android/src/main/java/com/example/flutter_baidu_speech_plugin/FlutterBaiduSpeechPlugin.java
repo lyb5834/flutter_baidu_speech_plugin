@@ -73,6 +73,18 @@ public class FlutterBaiduSpeechPlugin implements FlutterPlugin, MethodCallHandle
                                 }
 
                                 @Override
+                                public void asrErrorFinish() {
+                                    log("asrErrorFinish");
+                                    if (eventSink != null) {
+                                        HashMap<String, String> map = new HashMap<>();
+                                        map.put("status", "statusError");
+                                        map.put("data", "");
+                                        map.put("type", String.valueOf(type));
+                                        eventSink.success(map);
+                                    }
+                                }
+
+                                @Override
                                 public void asrPartialResult(List<String> result) {
                                     log("asrPartialResult:" + result.get(0));
                                     if (eventSink != null) {
