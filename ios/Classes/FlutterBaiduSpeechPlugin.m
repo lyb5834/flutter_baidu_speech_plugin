@@ -18,6 +18,7 @@ FlutterStreamHandler
 @property (strong, nonatomic) BDSEventManager *wakeUpManager;
 @property (strong, nonatomic) BDSEventManager *commandManager;
 @property (nonatomic, assign) BOOL isWakeUping;
+@property (nonatomic, assign) BOOL isWakeUpStarted;
 @end
 
 @implementation FlutterBaiduSpeechPlugin
@@ -48,6 +49,10 @@ FlutterStreamHandler
                         if (self.isWakeUping) { return; }
                         if ([self hasHeadset]) { return; }
                         [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
+                    } else {
+                        if (self.isWakeUpStarted && [[AVAudioSession sharedInstance].category isEqualToString:AVAudioSessionCategoryPlayback]) {
+                            [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord  withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
+                        }
                     }
                 }
                     break;
@@ -123,12 +128,14 @@ FlutterStreamHandler
       
       [self.wakeUpManager sendCommand:BDS_WP_CMD_LOAD_ENGINE];
       [self.wakeUpManager sendCommand:BDS_WP_CMD_START];
+      self.isWakeUpStarted = YES;
       NSLog(@"开始语音唤醒");
       
   } else if ([@"stopMonitorWakeUp" isEqualToString:call.method]) {
       
       [self.wakeUpManager sendCommand:BDS_WP_CMD_STOP];
       [self.wakeUpManager sendCommand:BDS_WP_CMD_UNLOAD_ENGINE];
+      self.isWakeUpStarted = NO;
       NSLog(@"关闭语音唤醒");
   }
   else {
@@ -152,6 +159,7 @@ FlutterStreamHandler
             NSLog(@"%@",text);
             NSError * error = (NSError *)aObj;
             self.isWakeUping = NO;
+            self.isWakeUpStarted = NO;
             [self configResultStatus:@"statusError" type:1 data:error.localizedDescription];
             break;
         }
